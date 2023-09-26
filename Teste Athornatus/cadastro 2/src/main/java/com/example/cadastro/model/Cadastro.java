@@ -20,6 +20,7 @@ public class Cadastro {
     @Column(name = "nome")
     private String nome;
 
+
     @Column(name = "dataNascimento")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
