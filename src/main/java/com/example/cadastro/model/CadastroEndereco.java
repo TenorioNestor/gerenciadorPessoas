@@ -10,7 +10,7 @@ public class CadastroEndereco {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "logradouro")
@@ -22,20 +22,13 @@ public class CadastroEndereco {
     @Column(name = "cidade")
     private String cidade;
 
+    public CadastroEndereco(){}
+    public CadastroEndereco(String logradouro, String cep, Integer numero, String cidade) {
 
-    @Column(name = "publi")
-    private boolean publi;
-
-    public CadastroEndereco() {
-
-    }
-
-    public CadastroEndereco(String logradouro, String cep, Integer numero, String cidade, boolean published) {
         this.logradouro = logradouro;
         this.cep = cep;
         this.numero = numero;
         this.cidade = cidade;
-        this.publi = published;
     }
 
     public long getId() {
@@ -75,18 +68,11 @@ public class CadastroEndereco {
         this.cidade = cidade;
     }
 
-    public boolean isPubli() {
-        return publi;
-    }
-
-    public void setPubli(boolean isPubli) {
-        this.publi = isPubli;
-    }
 
 
     @Override
     public String toString() {
-        return "Tutorial [Logradouro=" + logradouro + ", CEP=" + cep + ", Numero=" + numero + ", Cidade=" + cidade +", published=" + publi + "]";
+        return "Tutorial [Logradouro=" + logradouro + ", CEP=" + cep + ", Numero=" + numero + ", Cidade=" + cidade +"]";
     }
 
 }

@@ -64,7 +64,7 @@ public class EnderecoController {
     public ResponseEntity<CadastroEndereco> createEndereco(@RequestBody CadastroEndereco cadastroEndereco) {
         try {
             CadastroEndereco _cadastroEndereco = enderecoRepository
-                    .save(new CadastroEndereco(cadastroEndereco.getLogradouro(), cadastroEndereco.getCep(),cadastroEndereco.getNumero(), cadastroEndereco.getCidade(), false));
+                    .save(new CadastroEndereco(cadastroEndereco.getLogradouro(), cadastroEndereco.getCep(),cadastroEndereco.getNumero(), cadastroEndereco.getCidade()));
             return new ResponseEntity<>(_cadastroEndereco, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -81,7 +81,6 @@ public class EnderecoController {
             _cadastroEndereco.setCep(cadastroEndereco.getCep());
             _cadastroEndereco.setNumero(cadastroEndereco.getNumero());
             _cadastroEndereco.setCidade(cadastroEndereco.getCidade());
-            _cadastroEndereco.setPubli(cadastroEndereco.isPubli());
             return new ResponseEntity<>(enderecoRepository.save(_cadastroEndereco), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

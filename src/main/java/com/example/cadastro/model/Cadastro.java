@@ -1,12 +1,9 @@
 package com.example.cadastro.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDate;
 import java.util.Date;
 
-//import javax.persistence;
 
 
 @Entity
@@ -14,7 +11,7 @@ import java.util.Date;
 public class Cadastro {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(name = "nome")
@@ -25,22 +22,17 @@ public class Cadastro {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
 
-    @Column(name = "published")
-    private boolean published;
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name="ENDERECO_ID", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn (name="endereco_id", referencedColumnName = "id")
     private CadastroEndereco cadastroEndereco;
 
-    public Cadastro() {
-
-    }
-
-    public Cadastro(String nome, Date dataNascimento,CadastroEndereco cadastroEndereco, boolean published) {
+    public Cadastro(){}
+    public Cadastro(String nome, Date dataNascimento, CadastroEndereco cadastroEndereco) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.cadastroEndereco = cadastroEndereco;
-        this.published = published;
     }
+
     public long getId() {
         return id;
     }
@@ -69,18 +61,12 @@ public class Cadastro {
         this.dataNascimento = dataNascimento;
     }
 
-    public boolean isPublished() {
-        return published;
-    }
-
-    public void setPublished(boolean isPublished) {
-        this.published = isPublished;
-    }
 
     @Override
     public String toString() {
-        return "Tutorial [id=" + getId() + ", nome=" + getNome() + ", data=" + getDataNascimento() + ", Endereco=" + getCadastroEndereco() + "]";
+        return "Tutorial [id=" + id + ", nome=" + nome + ", data=" + dataNascimento + ", Endereco=" + cadastroEndereco + "]";
 
     }
+
 
 }

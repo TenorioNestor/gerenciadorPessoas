@@ -1,11 +1,12 @@
 package com.example.cadastro.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+
 import com.example.cadastro.model.CadastroEndereco;
-import com.example.cadastro.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -55,7 +56,6 @@ public class CadastroController {
     @GetMapping("/cadastro/{id}")
     public ResponseEntity<Cadastro> getCadastroById(@PathVariable("id") long id) {
         Optional<Cadastro> cadastroData = cadastroRepository.findById(id);
-
         if (cadastroData.isPresent()) {
             return new ResponseEntity<>(cadastroData.get(), HttpStatus.OK);
         } else {
@@ -66,9 +66,12 @@ public class CadastroController {
     @PostMapping("/cadastro")
     public ResponseEntity<Cadastro> createCadastro(@RequestBody Cadastro cadastro) {
         try {
-            Cadastro _cadastro = cadastroRepository
-                    .save(new Cadastro(cadastro.getNome(), cadastro.getDataNascimento(),cadastro.getCadastroEndereco(), false));
-            return new ResponseEntity<>(_cadastro, HttpStatus.CREATED);
+            CadastroEndereco cadastroEndereco = cadastro.getCadastroEndereco();
+            Cadastro _cadastro = cadastroRepository.save(
+                    new Cadastro(cadastro.getNome(), cadastro.getDataNascimento(),cadastroEndereco));
+
+            return  ResponseEntity.status(HttpStatus.CREATED).body(_cadastro);
+
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -82,7 +85,6 @@ public class CadastroController {
             Cadastro _cadastro = cadastroData.get();
             _cadastro.setNome(cadastro.getNome());
             _cadastro.setDataNascimento(cadastro.getDataNascimento());
-            _cadastro.setPublished(cadastro.isPublished());
             return new ResponseEntity<>(cadastroRepository.save(_cadastro), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -108,20 +110,6 @@ public class CadastroController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
 
-    }
-
-    @GetMapping("/cadastro/published")
-    public ResponseEntity<List<Cadastro>> findByPublished() {
-        try {
-            List<Cadastro> cadastro = cadastroRepository.findByPublished(true);
-
-            if (cadastro.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(cadastro, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
 }
