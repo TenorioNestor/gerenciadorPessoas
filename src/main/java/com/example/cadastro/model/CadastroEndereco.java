@@ -1,14 +1,9 @@
 package com.example.cadastro.model;
 import jakarta.persistence.*;
 
-//import javax.persistence;
-
-
 @Entity
 @Table(name = "Endereco")
 public class CadastroEndereco {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -30,16 +25,13 @@ public class CadastroEndereco {
         this.numero = numero;
         this.cidade = cidade;
     }
-
     public long getId() {
         return id;
     }
 
-
     public String getLogradouro() {
         return logradouro;
     }
-
     public void setLogradouro(String logradouro) {
         this.logradouro = logradouro;
     }
@@ -68,11 +60,5 @@ public class CadastroEndereco {
         this.cidade = cidade;
     }
 
-
-
-    @Override
-    public String toString() {
-        return "Tutorial [Logradouro=" + logradouro + ", CEP=" + cep + ", Numero=" + numero + ", Cidade=" + cidade +"]";
-    }
 
 }

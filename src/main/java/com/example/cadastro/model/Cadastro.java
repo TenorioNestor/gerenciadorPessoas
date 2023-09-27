@@ -65,14 +65,6 @@ public class Cadastro {
         this.dataNascimento = dataNascimento;
     }
 
-
-    @Override
-    public String toString() {
-        return "Tutorial [id=" + id + ", nome=" + nome + ", data=" + dataNascimento + ", Endereco=" + cadastroEndereco + "]";
-
-    }
-
-
     public void setId(long id) {
         this.id = id;
     }

@@ -19,8 +19,6 @@ public class CadastroController {
 
     @Autowired
     CadastroRepository cadastroRepository;
-
-
     @GetMapping("/cadastros")
     public ResponseEntity<List<Cadastro>> getAllCadastro(@RequestParam(required = false) String nome) {
         try {
