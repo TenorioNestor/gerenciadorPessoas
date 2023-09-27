@@ -26,11 +26,15 @@ public class Cadastro {
     @JoinColumn (name="endereco_id", referencedColumnName = "id")
     private CadastroEndereco cadastroEndereco;
 
-    public Cadastro(){}
+    public Cadastro(String nome1, Date date){}
     public Cadastro(String nome, Date dataNascimento, CadastroEndereco cadastroEndereco) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
         this.cadastroEndereco = cadastroEndereco;
+    }
+
+    public Cadastro() {
+
     }
 
     public long getId() {
@@ -69,4 +73,7 @@ public class Cadastro {
     }
 
 
+    public void setId(long id) {
+        this.id = id;
+    }
 }
