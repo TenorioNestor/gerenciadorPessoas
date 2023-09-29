@@ -1,12 +1,15 @@
 package com.example.cadastro.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
-@Table(name = "Endereco")
+@Table(name = "endereco")
 public class CadastroEndereco {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "endereco_generator")
+    private Long id;
 
     @Column(name = "logradouro")
     private String logradouro;
@@ -17,6 +20,12 @@ public class CadastroEndereco {
     @Column(name = "cidade")
     private String cidade;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "cadastro_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Cadastro cadastro;
+
     public CadastroEndereco(){}
     public CadastroEndereco(String logradouro, String cep, Integer numero, String cidade) {
 
@@ -25,7 +34,7 @@ public class CadastroEndereco {
         this.numero = numero;
         this.cidade = cidade;
     }
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -60,5 +69,11 @@ public class CadastroEndereco {
         this.cidade = cidade;
     }
 
+    public Cadastro getCadastro() {
+        return cadastro;
+    }
 
+    public void setCadastro(Cadastro cadastro) {
+        this.cadastro = cadastro;
+    }
 }

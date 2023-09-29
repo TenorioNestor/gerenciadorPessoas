@@ -1,7 +1,6 @@
 package com.example.cadastro.controller;
 
 import com.example.cadastro.model.Cadastro;
-import com.example.cadastro.model.CadastroEndereco;
 import com.example.cadastro.repository.CadastroRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,7 +51,6 @@ public class CadastroController {
     @PostMapping("/cadastro")
     public ResponseEntity<Cadastro> createCadastro(@RequestBody Cadastro cadastro) {
         try {
-            CadastroEndereco cadastroEndereco = cadastro.getCadastroEndereco();
             Cadastro _cadastro = cadastroRepository.save(cadastro);
 
             return  ResponseEntity.status(HttpStatus.CREATED).body(_cadastro);

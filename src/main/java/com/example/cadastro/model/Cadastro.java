@@ -22,15 +22,10 @@ public class Cadastro {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn (name="endereco_id", referencedColumnName = "id")
-    private CadastroEndereco cadastroEndereco;
 
-    public Cadastro(String nome1, Date date){}
-    public Cadastro(String nome, Date dataNascimento, CadastroEndereco cadastroEndereco) {
+    public Cadastro(String nome, Date dataNascimento) {
         this.nome = nome;
         this.dataNascimento = dataNascimento;
-        this.cadastroEndereco = cadastroEndereco;
     }
 
     public Cadastro() {
@@ -40,14 +35,6 @@ public class Cadastro {
     public long getId() {
         return id;
     }
-    public CadastroEndereco getCadastroEndereco() {
-        return cadastroEndereco;
-    }
-
-    public void setCadastroEndereco(CadastroEndereco cadastroEndereco) {
-        this.cadastroEndereco = cadastroEndereco;
-    }
-
 
     public String getNome() {
         return nome;
