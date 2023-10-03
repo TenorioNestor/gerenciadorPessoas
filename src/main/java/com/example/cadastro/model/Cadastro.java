@@ -17,14 +17,17 @@ public class Cadastro {
     @Column(name = "nome")
     private String nome;
 
+    @Column(name = "documento")
+    private Long documento;
 
     @Column(name = "dataNascimento")
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dataNascimento;
 
 
-    public Cadastro(String nome, Date dataNascimento) {
+    public Cadastro(String nome, Long documento,Date dataNascimento) {
         this.nome = nome;
+        this.documento = documento;
         this.dataNascimento = dataNascimento;
     }
 
@@ -54,5 +57,13 @@ public class Cadastro {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public Long getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(Long documento) {
+        this.documento = documento;
     }
 }
